@@ -45,47 +45,47 @@ export const Cube: React.FC<CubeProps> = ({ cubieSize = 1, action }) => {
 		setCubies(newCubies);
 	}, [cubieSize]);
 
-	const rotations: Record<Exclude<CubeActions, null>, () => Promise<void>> = {
-		F: async () => {
+	const rotations: Record<Exclude<CubeActions, null>, () => void> = {
+		F: () => {
 			rotateZ(1, 1);
 		},
-		f: async () => {
+		f: () => {
 			rotateZ(1, -1);
 		},
-		B: async () => {
+		B: () => {
 			rotateZ(-1, 1);
 		},
-		b: async () => {
+		b: () => {
 			rotateZ(-1, -1);
 		},
-		L: async () => {
+		L: () => {
 			rotateX(-1, -1);
 		},
-		l: async () => {
+		l: () => {
 			rotateX(-1, 1);
 		},
-		R: async () => {
+		R: () => {
 			rotateX(1, 1);
 		},
-		r: async () => {
+		r: () => {
 			rotateX(1, -1);
 		},
-		U: async () => {
+		U: () => {
 			rotateY(1, -1);
 		},
-		u: async () => {
+		u: () => {
 			rotateY(1, 1);
 		},
-		D: async () => {
+		D: () => {
 			rotateY(-1, 1);
 		},
-		d: async () => {
+		d: () => {
 			rotateY(-1, -1);
 		},
 	};
 
     useEffect(() => {
-        if (action) {
+		if (action) {
 			if (rotations[action]) {
 				rotations[action]();
 				// setFutureActions([...futureActions, action]);
@@ -111,14 +111,14 @@ export const Cube: React.FC<CubeProps> = ({ cubieSize = 1, action }) => {
     
     function rotateX(face: -1 | 1, direction: -1 | 1) {
         let newCubies = cubies.map(cubie => {
-            if (cubie.position!.x == face) {
+            if (cubie.position!.x == face*cubieSize) {
 				let angle = Math.PI / 2 * direction;
 
                 let matrix = new Matrix3();
                 matrix.translate(cubie.position!.y, cubie.position!.z);
                 matrix.rotate(angle);
 
-                cubie.position = new Vector3(cubie.position!.x, Math.round(matrix.elements[6]), Math.round(matrix.elements[7]));
+                cubie.position = new Vector3(cubie.position!.x, Math.round(matrix.elements[6])*cubieSize, Math.round(matrix.elements[7])*cubieSize);
                 cubie.rotation = new Quaternion(cubie.rotation!.x - angle, cubie.rotation!.y, cubie.rotation!.z);
             }
 
@@ -130,14 +130,14 @@ export const Cube: React.FC<CubeProps> = ({ cubieSize = 1, action }) => {
 
 	function rotateY(face: -1 | 1, direction: -1 | 1) {
         let newCubies = cubies.map(cubie => {
-            if (cubie.position!.y == face) {
+            if (cubie.position!.y == face*cubieSize) {
 				let angle = Math.PI / 2 * direction;
 
                 let matrix = new Matrix3();
                 matrix.translate(cubie.position!.x, cubie.position!.z);
                 matrix.rotate(angle);
 
-                cubie.position = new Vector3(Math.round(matrix.elements[6]), cubie.position!.y, Math.round(matrix.elements[7]));
+                cubie.position = new Vector3(Math.round(matrix.elements[6])*cubieSize, cubie.position!.y, Math.round(matrix.elements[7])*cubieSize);
                 cubie.rotation = new Quaternion(cubie.rotation!.x, cubie.rotation!.y + angle, cubie.rotation!.z);
             }
 
@@ -149,14 +149,14 @@ export const Cube: React.FC<CubeProps> = ({ cubieSize = 1, action }) => {
 
 	function rotateZ(face: -1 | 1, direction: -1 | 1) {
         let newCubies = cubies.map(cubie => {
-            if (cubie.position!.z == face) {
+            if (cubie.position!.z == face*cubieSize) {
 				let angle = Math.PI / 2 * direction;
 
                 let matrix = new Matrix3();
                 matrix.translate(cubie.position!.x, cubie.position!.y);
                 matrix.rotate(angle);
 
-                cubie.position = new Vector3(Math.round(matrix.elements[6]), Math.round(matrix.elements[7]), cubie.position!.z);
+                cubie.position = new Vector3(Math.round(matrix.elements[6])*cubieSize, Math.round(matrix.elements[7])*cubieSize, cubie.position!.z);
                 cubie.rotation = new Quaternion(cubie.rotation!.x, cubie.rotation!.y, cubie.rotation!.z - angle);
             }
 
