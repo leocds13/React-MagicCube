@@ -157,7 +157,11 @@ export const Cube: React.FC<CubeProps> = ({ cubieSize = 1, action }) => {
                 matrix.rotate(angle);
 
                 cubie.position = new Vector3(Math.round(matrix.elements[6])*cubieSize, Math.round(matrix.elements[7])*cubieSize, cubie.position!.z);
+				
+				console.log('rotateZ', cubie.position, angle);
+				console.log('rotateZ - r', cubie.rotation);
                 cubie.rotation = new Quaternion(cubie.rotation!.x, cubie.rotation!.y, cubie.rotation!.z - angle);
+				console.log('rotateZ - rnew', cubie.rotation);
             }
 
             return cubie;
