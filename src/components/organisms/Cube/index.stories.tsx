@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Cube } from ".";
+import { Cube } from "./old_index";
 import { CanvasComponent } from "../../atoms/Canvas";
 
 export default {
