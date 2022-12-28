@@ -1,18 +1,7 @@
 import type { NextPage } from "next";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { CanvasComponent } from "../src/components/atoms/Canvas";
 import { Cube, CubeActions } from "../src/components/organisms/Cube";
-import { Cubie } from "../src/components/molecules/Cubie";
-import {
-  BoxGeometry,
-  Euler,
-  Matrix4,
-  Mesh,
-  MeshBasicMaterial,
-  MeshStandardMaterial,
-  Quaternion,
-  Vector3,
-} from "three";
 
 // l, B L l f UU B l R B u B bbb d L D B d L
 const Home: NextPage = () => {
@@ -51,19 +40,9 @@ const Home: NextPage = () => {
     f();
   }
 
-  const geo = new BoxGeometry(1, 1, 1);
-  const mat = new MeshBasicMaterial({
-    color: 0x666666,
-  });
-  const cube = useRef<THREE.Mesh>(null);
-
-  useEffect(() => {
-    if (cube.current) {
-      cube.current!.rotation.set(0, 0, 0);
-      cube.current!.rotateOnAxis(new Vector3(1, 0, 0), Math.PI / 2); // Apends to actual rotation
-      cube.current!.rotateOnAxis(new Vector3(0, 0, 1), -Math.PI / 2); // Apends to actual rotation
-    }
-  }, []);
+  function HandleClickRotation(newAction: CubeActions) {
+    setAction(newAction);
+  }
 
   return (
     <div
@@ -75,29 +54,225 @@ const Home: NextPage = () => {
       <div
         style={{
           display: "flex",
-          flexDirection: "column",
           alignItems: "center",
+          gap: "2em",
         }}
       >
         <CanvasComponent backgroundColor="#eee" width={"50%"} height={400}>
           <Cube cubieSize={0.75} action={action} />
-          {/* <mesh 
-						geometry={new BoxGeometry(1, 1, 1)}
-						material={new MeshBasicMaterial({
-							color: 0x00FFAA
-						})}
-						rotation={[Math.PI*1.5, Math.PI*0, Math.PI*1]}
-					> */}
-          <mesh ref={cube}>
-            <mesh
-              material={mat}
-              geometry={geo}
-              position={new Vector3(-1, 1, 1)}
-            />
-          </mesh>
-          {/* </mesh> */}
         </CanvasComponent>
         <div
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+          }}
+        >
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "white", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("F");
+              }}
+            >
+              O
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "white", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("f");
+              }}
+            >
+              A
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "green", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("U");
+              }}
+            >
+              O
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "green", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("u");
+              }}
+            >
+              A
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "orange", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("R");
+              }}
+            >
+              O
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "orange", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("r");
+              }}
+            >
+              A
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "yellow", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("B");
+              }}
+            >
+              O
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "yellow", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("b");
+              }}
+            >
+              A
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "blue", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("D");
+              }}
+            >
+              O
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "blue", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("d");
+              }}
+            >
+              A
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "red", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("L");
+              }}
+            >
+              O
+            </button>
+          </div>
+          <div
+            style={{
+              flex: "50%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button
+              style={{ backgroundColor: "red", width: "50%" }}
+              onClick={() => {
+                HandleClickRotation("l");
+              }}
+            >
+              A
+            </button>
+          </div>
+        </div>
+        {/* <div
           style={{
             display: "flex",
             flexDirection: "row",
@@ -142,7 +317,7 @@ const Home: NextPage = () => {
           <b>Maiusculo</b> -{">"} Horário
           <br />
           <b>Minuscolo</b> -{">"} Anti-horário
-        </p>
+        </p> */}
       </div>
     </div>
   );
