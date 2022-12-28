@@ -23,7 +23,7 @@ export const CubieFace = ({
     rotation,
 }: CubieFaceProps) => {
   const geometry = new THREE.BoxGeometry(size, size, 0.01);
-  const material = new THREE.MeshBasicMaterial({ color });
+  const material = new THREE.MeshStandardMaterial({ color });
   const cube = new THREE.Mesh(geometry, material);
   cube.position.set(position.x, position.y, position.z);
   cube.rotation.set(rotation.x, rotation.y, rotation.z);

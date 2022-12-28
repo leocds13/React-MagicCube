@@ -46,7 +46,9 @@ export const Cubie = ({
         />
         <CubieFace
           size={size}
-          color={color || "yellow"}
+          color={
+            color || "#eab308" //yellow
+          }
           position={{ x: 0, y: 0, z: size / -2 }}
           rotation={{ x: 0, y: 0, z: 0 }}
         />
@@ -58,7 +60,9 @@ export const Cubie = ({
         />
         <CubieFace
           size={size}
-          color={color || "orange"}
+          color={
+            color || "#f97316" //orange
+          }
           position={{ x: size / 2, y: 0, z: 0 }}
           rotation={{ x: 0, y: Math.PI / 2, z: 0 }}
         />

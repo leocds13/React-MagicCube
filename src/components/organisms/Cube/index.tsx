@@ -65,7 +65,7 @@ export const Cube: FC<CubeProps> = ({ cubieSize = 1, action, setAction }) => {
         console.warn(`Unknown action: ${action}`);
       }
     }
-  }, [action]);
+  }, [action, setAction]);
 
   return (
     <mesh>

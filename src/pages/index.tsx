@@ -1,7 +1,8 @@
 import type { NextPage } from "next";
 import { useState } from "react";
-import { CanvasComponent } from "../src/components/atoms/Canvas";
-import { Cube, CubeActions } from "../src/components/organisms/Cube";
+import { CanvasComponent } from "../components/atoms/Canvas";
+import { Cube, CubeActions } from "../components/organisms/Cube";
+import { ArrowClockwise, ArrowCounterClockwise } from "phosphor-react";
 
 // l, B L l f UU B l R B u B bbb d L D B d L
 const Home: NextPage = () => {
@@ -31,7 +32,7 @@ const Home: NextPage = () => {
         let act = actions[
           Math.floor(Math.random() * actions.length)
         ] as CubeActions;
-        
+
         setAction(act);
         actionsHist.push(act);
 
@@ -62,244 +63,140 @@ const Home: NextPage = () => {
   }
 
   function HandleClickRotation(newAction: CubeActions) {
-      setAction(newAction);
+    setAction(newAction);
   }
 
   return (
-    <div
-      style={{
-        padding: "0 5%",
-      }}
-    >
-      <h1>My Magic Cube</h1>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "2em",
-        }}
-      >
-        <CanvasComponent backgroundColor="#eee" width={"50%"} height={400}>
+    <div className="p-[5%]">
+      <h1 className="text-2xl m-2 font-bold">My Magic Cube</h1>
+      <div className="flex gap-2">
+        <CanvasComponent backgroundColor="#eee" height={400}>
           <Cube cubieSize={0.75} action={action} setAction={setAction} />
         </CanvasComponent>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-          }}
-        >
-          <div
-            style={{
-              flex: "100%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
-            <button onClick={shuffle}>Embaralhar</button>
+        <div className="flex flex-wrap justify-center items-center w-1/3">
+          <div className="flex-[100%] flex justify-center items-center">
+            <button onClick={shuffle} className="bg-slate-400 p-2 rounded-md">
+              Embaralhar
+            </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "white", width: "50%" }}
+              className="bg-white w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("F");
               }}
             >
-              O
+              <ArrowClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "white", width: "50%" }}
+              className="bg-white w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("f");
               }}
             >
-              A
+              <ArrowCounterClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "green", width: "50%" }}
+              className="bg-green-500 w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("U");
               }}
             >
-              O
+              <ArrowClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "green", width: "50%" }}
+              className="bg-green-500 w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("u");
               }}
             >
-              A
+              <ArrowCounterClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "orange", width: "50%" }}
+              className="bg-orange-500 w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("R");
               }}
             >
-              O
+              <ArrowClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "orange", width: "50%" }}
+              className="bg-orange-500 w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("r");
               }}
             >
-              A
+              <ArrowCounterClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "yellow", width: "50%" }}
+              className="bg-yellow-500 w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("B");
               }}
             >
-              O
+              <ArrowClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "yellow", width: "50%" }}
+              className="bg-yellow-500 w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("b");
               }}
             >
-              A
+              <ArrowCounterClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "blue", width: "50%" }}
+              className="bg-blue-700 w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("D");
               }}
             >
-              O
+              <ArrowClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "blue", width: "50%" }}
+              className="bg-blue-700 w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("d");
               }}
             >
-              A
+              <ArrowCounterClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "red", width: "50%" }}
+              className="bg-[#f1171d] w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("L");
               }}
             >
-              O
+              <ArrowClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
-          <div
-            style={{
-              flex: "50%",
-              display: "flex",
-              justifyItems: "center",
-              alignItems: "center",
-            }}
-          >
+          <div className="flex-[50%] flex justify-center items-center">
             <button
-              style={{ backgroundColor: "red", width: "50%" }}
+              className="bg-[#f1171d] w-fill p-1 rounded-full m-2 border"
               onClick={() => {
                 HandleClickRotation("l");
               }}
             >
-              A
+              <ArrowCounterClockwise size={30} color="#000000" weight="fill" />
             </button>
           </div>
         </div>
