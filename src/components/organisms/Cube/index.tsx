@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { Dispatch, FC, SetStateAction, useEffect, useState } from "react";
 import { Cubie } from "../../molecules/Cubie";
 import { Quaternion, Vector3 } from "three";
 import { rotations } from "./rulesForRotations";
@@ -26,12 +26,12 @@ export type CubieTrackProps = {
 interface CubeProps {
   cubieSize?: number;
   action: CubeActions;
+  setAction: Dispatch<SetStateAction<CubeActions>>
 }
 
-export const Cube: FC<CubeProps> = ({ cubieSize = 1, action }) => {
+export const Cube: FC<CubeProps> = ({ cubieSize = 1, action, setAction }) => {
   const [cubieTrackProps, setCubieTrackProps] = useState<CubieTrackProps[][][]>(
     () => {
-      console.log('init')
       let xList: CubieTrackProps[][][] = [];
       for (let x = -1; x <= 1; x++) {
         let yList: CubieTrackProps[][] = [];
@@ -60,6 +60,7 @@ export const Cube: FC<CubeProps> = ({ cubieSize = 1, action }) => {
       if (rotations[action]) {
         let newProps = rotations[action](cubieTrackProps);
         setCubieTrackProps(newProps);
+        setAction(null);
       } else {
         console.warn(`Unknown action: ${action}`);
       }
@@ -77,7 +78,7 @@ export const Cube: FC<CubeProps> = ({ cubieSize = 1, action }) => {
                 position={zProps.position}
                 rotation={zProps.rotation}
                 size={cubieSize}
-                color={xi == 0 && yi == 2 && zi == 2 ? "purple" : undefined}
+                // color={xi == 0 && yi == 2 && zi == 2 ? "purple" : undefined}
               />
             );
           })

@@ -11,10 +11,10 @@ const Home: NextPage = () => {
     let count = 0;
 
     const times = Math.floor(Math.random() * 10) + 14;
-
+    let actionsHist: CubeActions[] = [];
     const f = () => {
       if (count < times) {
-        let actions = [
+        let actions: CubeActions[] = [
           "F",
           "B",
           "L",
@@ -31,17 +31,38 @@ const Home: NextPage = () => {
         let act = actions[
           Math.floor(Math.random() * actions.length)
         ] as CubeActions;
-        console.log(act);
+        
         setAction(act);
+        actionsHist.push(act);
+
         count++;
-        setTimeout(f, 1000);
+        setTimeout(f, 100);
+      } else {
+        // console.log(actionsHist);
+        // b();
+      }
+    };
+
+    const b = () => {
+      let act = actionsHist.pop();
+      console.log(act);
+      if (act) {
+        if (act === act.toUpperCase()) {
+          setAction(act!.toLowerCase() as CubeActions);
+        } else {
+          setAction(act!.toUpperCase() as CubeActions);
+        }
+      }
+      count--;
+      if (count > 0) {
+        setTimeout(b, 100);
       }
     };
     f();
   }
 
   function HandleClickRotation(newAction: CubeActions) {
-    setAction(newAction);
+      setAction(newAction);
   }
 
   return (
@@ -59,7 +80,7 @@ const Home: NextPage = () => {
         }}
       >
         <CanvasComponent backgroundColor="#eee" width={"50%"} height={400}>
-          <Cube cubieSize={0.75} action={action} />
+          <Cube cubieSize={0.75} action={action} setAction={setAction} />
         </CanvasComponent>
         <div
           style={{
@@ -67,6 +88,16 @@ const Home: NextPage = () => {
             flexWrap: "wrap",
           }}
         >
+          <div
+            style={{
+              flex: "100%",
+              display: "flex",
+              justifyItems: "center",
+              alignItems: "center",
+            }}
+          >
+            <button onClick={shuffle}>Embaralhar</button>
+          </div>
           <div
             style={{
               flex: "50%",
