@@ -7,12 +7,12 @@ import { ArrowClockwise, ArrowCounterClockwise } from "phosphor-react";
 // l, B L l f UU B l R B u B bbb d L D B d L
 const Home: NextPage = () => {
   const [action, setAction] = useState<CubeActions>(null);
+  const [actionsHist, setActionsHist] = useState<CubeActions[]>([]);
 
   function shuffle() {
     let count = 0;
 
     const times = Math.floor(Math.random() * 10) + 14;
-    let actionsHist: CubeActions[] = [];
     const f = () => {
       if (count < times) {
         let actions: CubeActions[] = [
@@ -34,7 +34,7 @@ const Home: NextPage = () => {
         ] as CubeActions;
 
         setAction(act);
-        actionsHist.push(act);
+        setActionsHist((actiualActionsHist) => [act, ...actiualActionsHist]);
 
         count++;
         setTimeout(f, 100);
@@ -64,6 +64,7 @@ const Home: NextPage = () => {
 
   function HandleClickRotation(newAction: CubeActions) {
     setAction(newAction);
+    setActionsHist([newAction, ...actionsHist]);
   }
 
   return (
@@ -200,38 +201,14 @@ const Home: NextPage = () => {
             </button>
           </div>
         </div>
-        {/* <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-around",
-            alignItems: "center",
-          }}
-        >
-          <input
-            type="text"
-            value={action || ""}
-            style={{
-              margin: "2em 0",
-            }}
-            onChange={(e) => {
-              if (e.target.value !== "") {
-                setAction(
-                  e.target.value[e.target.value.length - 1] as CubeActions
-                );
-              } else if (e.target.value === "") {
-                setAction(null);
-              }
-            }}
-          />
-          <button
-            onClick={() => {
-              shuffle();
-            }}
-          >
-            Embaralhar
-          </button>
-        </div>
+      </div>
+      <div className="mt-4 m-2 p-2 bg-slate-200 rounded-lg border border-black h-8 flex gap-1 items-center text-lg relative">
+        {actionsHist.map((act, i) => (
+          <span key={i}>{act}</span>
+        ))}
+      </div>
+      <div className="mt-4 m-2 p-2 bg-slate-200 rounded-lg border border-black">
+        <h4 className="text-lg font-semibold mb-2">Legenda</h4>
 
         <ul>
           <li>F ou f: Face</li>
@@ -241,11 +218,11 @@ const Home: NextPage = () => {
           <li>U ou u: Topo</li>
           <li>D ou d: Base</li>
         </ul>
-        <p>
-          <b>Maiusculo</b> -{">"} Horário
+        <p className="mt-2">
+          <b>Maiusculo</b> -{">"} Horário 
           <br />
           <b>Minuscolo</b> -{">"} Anti-horário
-        </p> */}
+        </p>
       </div>
     </div>
   );
