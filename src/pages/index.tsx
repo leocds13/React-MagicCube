@@ -107,7 +107,7 @@ const Home: NextPage = () => {
 					</div>
 					<div className="flex-[50%] flex justify-center items-center">
 						<button
-							className="bg-white w-fill p-1 rounded-full m-2 border relative relative"
+							className="bg-white w-fill p-1 rounded-full m-2 border relative"
 							onClick={() => {
 								HandleClickRotation("w");
 							}}
