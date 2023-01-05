@@ -1,8 +1,8 @@
 import { Matrix3, Quaternion, Vector3 } from "three";
-import { CubeActions, CubieTrackProps } from ".";
+import { CubeActionsKeys, CubieTrackProps } from ".";
 
 export const rotations: Record<
-  Exclude<CubeActions, null>,
+  CubeActionsKeys,
   (cubieProps: CubieTrackProps[][][]) => CubieTrackProps[][][]
 > = {
   W: (cubieProps: CubieTrackProps[][][]) => {

@@ -3,20 +3,24 @@ import { Cubie } from "../../molecules/Cubie";
 import { Quaternion, Vector3 } from "three";
 import { rotations } from "./rulesForRotations";
 
-export type CubeActions =
-  | "W"
-  | "Y"
-  | "R"
-  | "O"
-  | "G"
-  | "B"
-  | "w"
-  | "y"
-  | "r"
-  | "o"
-  | "g"
-  | "b"
-  | null;
+
+export enum CubeActions {
+	"W" = "W",
+	"w" = "w",
+	"Y" = "Y",
+	"y" = "y",
+	"R" = "R",
+	"r" = "r",
+	"O" = "O",
+	"o" = "o",
+	"G" = "G",
+	"g" = "g",
+	"B" = "B",
+	"b" = "b",
+	length = 12
+};
+
+export type CubeActionsKeys = keyof Omit<typeof CubeActions, 'length'>;
 
 export type CubieTrackProps = {
   position: Vector3;
@@ -25,8 +29,8 @@ export type CubieTrackProps = {
 
 interface CubeProps {
   cubieSize?: number;
-  action: CubeActions;
-  setAction: Dispatch<SetStateAction<CubeActions>>
+  action: CubeActionsKeys | null;
+  setAction: Dispatch<SetStateAction<CubeActionsKeys | null>>
 }
 
 export const Cube: FC<CubeProps> = ({ cubieSize = 1, action, setAction }) => {

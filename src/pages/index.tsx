@@ -1,13 +1,19 @@
 import type { NextPage } from "next";
 import { useState } from "react";
 import { CanvasComponent } from "../components/atoms/Canvas";
-import { Cube, CubeActions } from "../components/organisms/Cube";
-import { ArrowClockwise, ArrowCounterClockwise } from "phosphor-react";
+import {
+	Cube,
+	CubeActions,
+	CubeActionsKeys,
+} from "../components/organisms/Cube";
+import { RotateButton } from "../components/RotateButton";
+
+const listOfActions = Object.keys(CubeActions).filter(key => isNaN(Number(key)) && key !== "length") as CubeActionsKeys[];
 
 // l, B L l f UU B l R B u B bbb d L D B d L
 const Home: NextPage = () => {
-	const [action, setAction] = useState<CubeActions>(null);
-	const [actionsHist, setActionsHist] = useState<CubeActions[]>([]);
+	const [action, setAction] = useState<CubeActionsKeys | null>(null);
+	const [actionsHist, setActionsHist] = useState<CubeActionsKeys[]>([]);
 
 	function shuffle() {
 		let count = 0;
@@ -15,33 +21,20 @@ const Home: NextPage = () => {
 		const times = Math.floor(Math.random() * 10) + 14;
 		const f = () => {
 			if (count < times) {
-				let actions: CubeActions[] = [
-					"W",
-					"Y",
-					"R",
-					"O",
-					"G",
-					"B",
-					"w",
-					"y",
-					"r",
-					"o",
-					"g",
-					"b",
+				let act = listOfActions[
+					Math.floor(Math.random() * CubeActions.length)
 				];
-				let act = actions[
-					Math.floor(Math.random() * actions.length)
-				] as CubeActions;
 
-				setAction(act);
+				setAction(act as CubeActionsKeys);
 				setActionsHist((actiualActionsHist) => [
-					act,
+					act as CubeActionsKeys,
 					...actiualActionsHist,
 				]);
 
 				count++;
 				setTimeout(f, 100);
 			} else {
+				// UnCommento lines below to test. It shold shuffle and executes the spets backwords, returning to the origins
 				// console.log(actionsHist);
 				// b();
 			}
@@ -52,9 +45,9 @@ const Home: NextPage = () => {
 			console.log(act);
 			if (act) {
 				if (act === act.toUpperCase()) {
-					setAction(act!.toLowerCase() as CubeActions);
+					setAction(act!.toLowerCase() as CubeActionsKeys);
 				} else {
-					setAction(act!.toUpperCase() as CubeActions);
+					setAction(act!.toUpperCase() as CubeActionsKeys);
 				}
 			}
 			count--;
@@ -65,7 +58,7 @@ const Home: NextPage = () => {
 		f();
 	}
 
-	function HandleClickRotation(newAction: CubeActions) {
+	function HandleClickRotation(newAction: CubeActionsKeys) {
 		setAction(newAction);
 		setActionsHist([newAction, ...actionsHist]);
 	}
@@ -90,192 +83,46 @@ const Home: NextPage = () => {
 							Embaralhar
 						</button>
 					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-white w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("W");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">W</span>
-							<ArrowClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-white w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("w");
-							}}
-						>
-							<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">w</span>
-							<ArrowCounterClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-								className=""
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-green-500 w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("G");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">G</span>
-							<ArrowClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-green-500 w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("g");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">g</span>
-							<ArrowCounterClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-orange-500 w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("O");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">O</span>
-							<ArrowClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-orange-500 w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("o");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">o</span>
-							<ArrowCounterClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-yellow-500 w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("Y");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">Y</span>
-							<ArrowClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-yellow-500 w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("y");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">y</span>
-							<ArrowCounterClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-blue-700 w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("B");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">B</span>
-							<ArrowClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-blue-700 w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("b");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">b</span>
-							<ArrowCounterClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-[#f1171d] w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("R");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">R</span>
-							<ArrowClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
-					<div className="flex-[50%] flex justify-center items-center">
-						<button
-							className="bg-[#f1171d] w-fill p-1 rounded-full m-2 border relative"
-							onClick={() => {
-								HandleClickRotation("r");
-							}}
-						>
-						<span className="absolute w-6 h-6 left-0 right-0 top-0 bottom-0 m-auto">r</span>
-							<ArrowCounterClockwise
-								size={40}
-								color="#000000"
-								weight="fill"
-							/>
-						</button>
-					</div>
+					{listOfActions.map((act) => {
+						return (
+							<div
+								className="flex-[50%] flex justify-center items-center"
+								key={act}
+							>
+								<RotateButton
+									HandleClickRotation={HandleClickRotation}
+									action={act as CubeActionsKeys}
+									icon={
+										act === act.toUpperCase()
+											? "ArrowClockwise"
+											: "ArrowCounterClockwise"
+									}
+									className={
+										act.toUpperCase() == "W"
+											? "bg-white"
+											: act.toUpperCase() == "G"
+											? "bg-green-500"
+											: act.toUpperCase() == "O"
+											? "bg-orange-500"
+											: act.toUpperCase() == "Y"
+											? "bg-yellow-500"
+											: act.toUpperCase() == "B"
+											? "bg-blue-700"
+											: act.toUpperCase() == "R"
+											? "bg-[#f1171d]"
+											: ""
+									}
+								/>
+							</div>
+						);
+					})}
 				</div>
 			</div>
-			<div className="h-15 mt-4 m-2 px-2 py-4 bg-slate-200 rounded-lg border border-black flex gap-1 items-center text-lg
+			<div
+				className="h-15 mt-4 m-2 px-2 py-4 bg-slate-200 rounded-lg border border-black flex gap-1 items-center text-lg
         overflow-x-auto
-        scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-300">
+        scrollbar scrollbar-thumb-gray-700 scrollbar-track-gray-300"
+			>
 				{actionsHist.map((act, i) => (
 					<span key={i}>{act}</span>
 				))}
