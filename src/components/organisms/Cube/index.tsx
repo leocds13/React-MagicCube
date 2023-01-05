@@ -4,18 +4,18 @@ import { Quaternion, Vector3 } from "three";
 import { rotations } from "./rulesForRotations";
 
 export type CubeActions =
-  | "F"
-  | "B"
-  | "L"
+  | "W"
+  | "Y"
   | "R"
-  | "U"
-  | "D"
-  | "f"
-  | "b"
-  | "l"
+  | "O"
+  | "G"
+  | "B"
+  | "w"
+  | "y"
   | "r"
-  | "u"
-  | "d"
+  | "o"
+  | "g"
+  | "b"
   | null;
 
 export type CubieTrackProps = {

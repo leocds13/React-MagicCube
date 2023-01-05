@@ -5,40 +5,40 @@ export const rotations: Record<
   Exclude<CubeActions, null>,
   (cubieProps: CubieTrackProps[][][]) => CubieTrackProps[][][]
 > = {
-  F: (cubieProps: CubieTrackProps[][][]) => {
+  W: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "z", 1, rotateZ, positionZ, 1);
   },
-  f: (cubieProps: CubieTrackProps[][][]) => {
+  w: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "z", 1, rotateZ, positionZ, -1);
   },
-  B: (cubieProps: CubieTrackProps[][][]) => {
+  Y: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "z", -1, rotateZ, positionZ, -1);
   },
-  b: (cubieProps: CubieTrackProps[][][]) => {
+  y: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "z", -1, rotateZ, positionZ, 1);
   },
-  L: (cubieProps: CubieTrackProps[][][]) => {
+  R: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "x", -1, rotateX, positionX, -1);
   },
-  l: (cubieProps: CubieTrackProps[][][]) => {
+  r: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "x", -1, rotateX, positionX, 1);
   },
-  R: (cubieProps: CubieTrackProps[][][]) => {
+  O: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "x", 1, rotateX, positionX, 1);
   },
-  r: (cubieProps: CubieTrackProps[][][]) => {
+  o: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "x", 1, rotateX, positionX, -1);
   },
-  U: (cubieProps: CubieTrackProps[][][]) => {
+  G: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "y", 1, rotateY, positionY, 1);
   },
-  u: (cubieProps: CubieTrackProps[][][]) => {
+  g: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "y", 1, rotateY, positionY, -1);
   },
-  D: (cubieProps: CubieTrackProps[][][]) => {
+  B: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "y", -1, rotateY, positionY, -1);
   },
-  d: (cubieProps: CubieTrackProps[][][]) => {
+  b: (cubieProps: CubieTrackProps[][][]) => {
     return RotateOnAxies(cubieProps, "y", -1, rotateY, positionY, 1);
   },
 };

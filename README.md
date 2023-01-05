@@ -1,5 +1,6 @@
 
 Projeto em React -> TS, NextJS, StoryBook
+Para 3D com React -> react-Three
 
 ## Iniciando
 
@@ -33,16 +34,17 @@ Abra [http://localhost:6006](http://localhost:6006) para ver o tudo está rodand
 
 Em [http://localhost:3000](http://localhost:3000) (`pages/index.tsx`)
 
-Existe um Input on você pode Digitar os valores:
-- F ou f: Face
-- B ou b: Trás
-- L ou l: Esquerda
-- R ou r: Direita
-- U ou u: Topo
-- D ou d: Base
+Existe os botões com os respectivos valores que rotacionam o cubo:
+- W ou w: White
+- Y ou y: Yellow
+- R ou r: Red
+- O ou o: Orange
+- G ou g: Green
+- B ou b: Blue
 
 **Maiusculo** -> Horário
 
 **Minuscolo** -> Anti-horário
 
 ## Visite para ver o Resultado: [https://react-magic-cube.vercel.app](https://react-magic-cube.vercel.app)
+
