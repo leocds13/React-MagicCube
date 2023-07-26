@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Cube, CubeActions } from ".";
+import { Cube, CubeActionsKeys } from ".";
 import { CanvasComponent } from "../../atoms/Canvas";
 import { useState } from "react";
 import { useEffect } from "@storybook/addons";
@@ -10,7 +10,7 @@ export default {
 } as ComponentMeta<typeof Cube>;
 
 const Template: ComponentStory<typeof Cube> = (args) => {
-  const [action, setAction] = useState<CubeActions>(null);
+	const [action, setAction] = useState<CubeActionsKeys | null>(null);
 
   useEffect(() => {
     setAction(args.action);
